@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merci — Mailflair</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070B14;--bg-soft:#0C1322;--line:rgba(120,160,255,.12);
+  --txt:#E8EEFB;--txt-dim:#94A3C4;--cyan:#37E2FF;--indigo:#6C7BFF;--safe:#3DE8A0;
+  --grad:linear-gradient(120deg,var(--cyan),var(--indigo));
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  min-height:100vh;display:grid;place-items:center;padding:24px;
+  font-family:'Inter',sans-serif;color:var(--txt);line-height:1.6;
+  background:
+    radial-gradient(800px 460px at 80% -10%,rgba(108,123,255,.16),transparent 60%),
+    radial-gradient(600px 460px at 10% 110%,rgba(55,226,255,.10),transparent 60%),var(--bg);
+}
+.card{
+  width:min(520px,100%);text-align:center;background:var(--bg-soft);
+  border:1px solid rgba(55,226,255,.3);border-radius:24px;padding:52px 40px;
+  box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(55,226,255,.1);
+  animation:pop .5s cubic-bezier(.2,.9,.3,1.2);
+}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.checkwrap{
+  width:96px;height:96px;margin:0 auto 26px;border-radius:50%;
+  background:rgba(61,232,160,.1);border:1px solid rgba(61,232,160,.45);
+  display:grid;place-items:center;animation:glow 2.4s ease-in-out infinite;
+}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(61,232,160,.25)}50%{box-shadow:0 0 0 14px rgba(61,232,160,0)}}
+.checkwrap svg{width:46px;height:46px}
+.checkwrap path{
+  stroke:var(--safe);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:48;stroke-dashoffset:48;animation:draw .7s .3s forwards;
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+h1{font-family:'Sora',sans-serif;font-size:clamp(1.5rem,4vw,1.9rem);letter-spacing:-.02em;margin-bottom:14px}
+p{color:var(--txt-dim);font-size:.98rem;margin-bottom:14px}
+strong{color:var(--txt)}
+.ringing{
+  display:inline-flex;align-items:center;gap:10px;margin:6px 0 28px;padding:11px 20px;
+  border-radius:999px;background:rgba(55,226,255,.08);border:1px solid rgba(55,226,255,.3);
+  color:var(--cyan);font-size:.9rem;
+}
+.ringing .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(55,226,255,.55)}50%{box-shadow:0 0 0 8px rgba(55,226,255,0)}}
+.btn{
+  display:inline-block;text-decoration:none;border-radius:12px;padding:14px 28px;
+  font-weight:600;font-size:.95rem;background:var(--grad);color:#04101c;
+  box-shadow:0 4px 24px rgba(55,226,255,.35);transition:transform .2s,box-shadow .2s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(55,226,255,.5)}
+.btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.foot{margin-top:26px;font-size:.78rem;color:var(--txt-dim)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="checkwrap" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h1>Félicitations, votre demande est bien reçue !</h1>
+    <p>Notre assistant virtuel vous appelle <strong>dans quelques secondes</strong> pour en apprendre un peu plus sur vous et activer votre essai gratuit de 7 jours.</p>
+    <span class="ringing"><span class="dot"></span> Appel en cours de préparation…</span>
+    <p style="font-size:.88rem">Si vous manquez l'appel, notre équipe vous recontacte sous 24 h. Pensez à vérifier vos e-mails.</p>
+    <a class="btn" href="index.html">Retourner à l'accueil</a>
+    <div class="foot">© 2026 Qytos SAS · Mailflair · support@mailflair.eu</div>
+  </main>
+</body>
+</html>
