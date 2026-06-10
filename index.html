@@ -441,18 +441,7 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
   overlay.addEventListener('click',e=>{ if(e.target===overlay) closePopup(); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&overlay.classList.contains('open')) closePopup(); });
 
-  // Détection du submit n8n :
-  // Configure dans n8n (Form Trigger > Respond with Redirect) l'URL : <ton-site>/merci.html?embed=1
-  // La redirection se produit DANS l'iframe (même origine que la page) -> on peut la détecter.
-  frame.addEventListener('load',()=>{
-    try{
-      if(frame.contentWindow.location.pathname.includes('merci')){ show('thanks'); }
-    }catch(e){ /* cross-origin = encore sur n8n, on ignore */ }
-  });
-
-  // Fallback manuel
-  document.getElementById('manualDone').addEventListener('click',()=>show('thanks'));
-})();
+   merci. Merci.
 </script>
 </body>
 </html>
