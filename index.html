@@ -360,15 +360,23 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
         <h2>Dernière étape avant la protection</h2>
         <p class="sub">30 secondes. Notre assistant vous appelle juste après pour activer votre essai.</p>
         
-        <form id="mailflairForm" style="display: flex; flex-direction: column; gap: 14px; margin-top: 20px;">
-          <input type="text" id="mfName" placeholder="Votre prénom" required 
-                 style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
-                 
-          <input type="email" id="mfEmail" placeholder="Votre adresse e-mail" required 
-                 style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
-                 
-          <button type="submit" class="btn btn-primary" style="padding: 15px; margin-top: 10px;">Activer mon essai</button>
-        </form>
+        <form id="mailflairForm" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+  <input type="text" id="mfPrenom" placeholder="Prénom" required style="padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt);">
+  <input type="text" id="mfNom" placeholder="Nom" required style="padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt);">
+  <input type="email" id="mfEmail" placeholder="Adresse Gmail" required style="padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt);">
+  <input type="tel" id="mfTel" placeholder="Numéro de téléphone" required style="padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt);">
+  
+  <select id="mfVolume" style="padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt);">
+    <option value="">Volume de boîtes à sécuriser ?</option>
+    <option value="1-10">1 - 10</option>
+    <option value="10-50">10 - 50</option>
+    <option value="50+">Plus de 50</option>
+  </select>
+
+  <input type="text" id="mfRisque" placeholder="Risque cyber prioritaire" style="padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt);">
+
+  <button type="submit" class="btn btn-primary" style="padding: 15px; margin-top: 10px;">Activer mon essai</button>
+</form>
       </div>
 
       <div class="popup-panel" id="panel-thanks" style="text-align:center">
@@ -423,23 +431,27 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&overlay.classList.contains('open')) closePopup(); });
 
   // Gestion de l'envoi du nouveau formulaire natif vers n8n
-  document.getElementById('mailflairForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Empêche la page de recharger
-    
-    // Récupération des données tapées par l'utilisateur
-    const prenom = document.getElementById('mfName').value;
-    const email = document.getElementById('mfEmail').value;
+document.getElementById('mailflairForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Récupération de toutes les données
+  const data = {
+    prenom: document.getElementById('mfPrenom').value,
+    nom: document.getElementById('mfNom').value,
+    email: document.getElementById('mfEmail').value,
+    "Numéro de téléphone": document.getElementById('mfTel').value, // Nom exacte pour n8n
+    volume: document.getElementById('mfVolume').value,
+    risk: document.getElementById('mfRisque').value
+  };
 
-    // Affiche le panel "Merci" immédiatement
-    show('thanks');
+  show('thanks');
 
-    // Envoi silencieux des données vers le Webhook n8n
-    fetch('https://gallagherlukaaaaa01.app.n8n.cloud/webhook/d2c12003-81f0-4ee4-b2ff-825e01066800', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prenom: prenom, email: email })
-    }).catch(err => console.log("Erreur d'envoi", err));
-  });
+  fetch('https://gallagherlukaaaaa01.app.n8n.cloud/webhook/d2c12003-81f0-4ee4-b2ff-825e01066800', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(err => console.log("Erreur d'envoi", err));
+});
 })();
 </script>
 </body>
