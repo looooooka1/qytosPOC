@@ -25,9 +25,6 @@
   --radius:18px;
   --font-display:'Sora',sans-serif;
   --font-body:'Inter',sans-serif;
-  /* hauteur visible du form n8n (clipping du footer "Powered by n8n") */
-  --n8n-visible:510px;
-  --n8n-real:560px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -156,7 +153,7 @@ section{padding:clamp(56px,9vh,100px) clamp(20px,5vw,64px);max-width:1240px;marg
 footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);display:flex;
   justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.85rem;color:var(--txt-dim)}
 
-/* ============ POPUP PUB ============ */
+/* ============ POPUP ============ */
 .overlay{position:fixed;inset:0;z-index:100;background:rgba(4,7,14,.75);backdrop-filter:blur(8px);
   display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
 .overlay.open{opacity:1;pointer-events:auto}
@@ -186,13 +183,7 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
 .popup .btn-primary{width:100%;padding:15px}
 .popup-foot{margin-top:14px;font-size:.78rem;color:var(--txt-dim);text-align:center}
 
-/* Panel 2 : form n8n + clipping */
-.form-clip{position:relative;overflow:hidden;height:var(--n8n-visible);border-radius:14px;
-  background:#0A1020;border:1px solid var(--line)}
-.form-clip iframe{width:100%;height:var(--n8n-real);border:none;display:block}
-.form-fallback{margin-top:12px;width:100%;background:none;border:none;color:var(--txt-dim);
-  font-size:.78rem;text-decoration:underline}
-.form-fallback:hover{color:var(--cyan)}
+/* Panel 2 : form custom */
 .panel-form{padding:22px 22px 18px}
 .panel-form h2{font-size:1.15rem;margin-bottom:6px}
 .panel-form .sub{font-size:.85rem;color:var(--txt-dim);margin-bottom:14px}
@@ -225,7 +216,6 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
 @media (max-width:520px){
   .pipeline{grid-template-columns:1fr}
   .popup-panel{padding:26px 20px}
-  :root{--n8n-visible:480px;--n8n-real:530px}
 }
 </style>
 </head>
@@ -345,13 +335,11 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
   <span>6 rue de l'École, L-7391 Blaschette, Luxembourg · support@mailflair.eu</span>
 </footer>
 
-<!-- ============ POPUP ============ -->
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="popup-title">
   <div class="popup">
     <button class="popup-close" id="popupClose" aria-label="Fermer">✕</button>
     <div class="popup-stage">
 
-      <!-- Panel 1 : publicité -->
       <div class="popup-panel active" id="panel-ad">
         <span class="ad-badge">Offre limitée · Mailflair</span>
         <div class="ad-visual">
@@ -368,27 +356,21 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
         <div class="popup-foot">Sans engagement · Annulable à tout moment · RGPD</div>
       </div>
 
-      <!-- Panel 2 : formulaire n8n -->
       <div class="popup-panel panel-form" id="panel-form">
         <h2>Dernière étape avant la protection</h2>
         <p class="sub">30 secondes. Notre assistant vous appelle juste après pour activer votre essai.</p>
-        <div class="popup-panel panel-form" id="panel-form">
-  <h2>Dernière étape avant la protection</h2>
-  <p class="sub">30 secondes. Notre assistant vous appelle juste après pour activer votre essai.</p>
-  
-  <form id="mailflairForm" style="display: flex; flex-direction: column; gap: 14px; margin-top: 20px;">
-    <input type="text" id="mfName" placeholder="Votre prénom" required 
-           style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
-           
-    <input type="email" id="mfEmail" placeholder="Votre adresse e-mail" required 
-           style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
-           
-    <button type="submit" class="btn btn-primary" style="padding: 15px; margin-top: 10px;">Activer mon essai</button>
-  </form>
+        
+        <form id="mailflairForm" style="display: flex; flex-direction: column; gap: 14px; margin-top: 20px;">
+          <input type="text" id="mfName" placeholder="Votre prénom" required 
+                 style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
+                 
+          <input type="email" id="mfEmail" placeholder="Votre adresse e-mail" required 
+                 style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
+                 
+          <button type="submit" class="btn btn-primary" style="padding: 15px; margin-top: 10px;">Activer mon essai</button>
+        </form>
+      </div>
 
-</div>
-
-      <!-- Panel 3 : merci -->
       <div class="popup-panel" id="panel-thanks" style="text-align:center">
         <div class="checkwrap"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
         <h2>Merci ! C'est noté.</h2>
@@ -405,7 +387,6 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
 (function(){
   const overlay=document.getElementById('overlay');
   const panels={ad:document.getElementById('panel-ad'),form:document.getElementById('panel-form'),thanks:document.getElementById('panel-thanks')};
-  const frame=document.getElementById('n8nFrame');
   let lastFocus=null;
 
   function show(name){
@@ -441,7 +422,25 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
   overlay.addEventListener('click',e=>{ if(e.target===overlay) closePopup(); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&overlay.classList.contains('open')) closePopup(); });
 
-   merci. Merci.
+  // Gestion de l'envoi du nouveau formulaire natif vers n8n
+  document.getElementById('mailflairForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Empêche la page de recharger
+    
+    // Récupération des données tapées par l'utilisateur
+    const prenom = document.getElementById('mfName').value;
+    const email = document.getElementById('mfEmail').value;
+
+    // Affiche le panel "Merci" immédiatement
+    show('thanks');
+
+    // Envoi silencieux des données vers le Webhook n8n
+    fetch('https://gallagherlukaaaaa01.app.n8n.cloud/webhook/d2c12003-81f0-4ee4-b2ff-825e01066800', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prenom: prenom, email: email })
+    }).catch(err => console.log("Erreur d'envoi", err));
+  });
+})();
 </script>
 </body>
 </html>
