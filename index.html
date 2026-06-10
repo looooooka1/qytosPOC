@@ -372,11 +372,21 @@ footer{border-top:1px solid var(--line);padding:32px clamp(20px,5vw,64px);displa
       <div class="popup-panel panel-form" id="panel-form">
         <h2>Dernière étape avant la protection</h2>
         <p class="sub">30 secondes. Notre assistant vous appelle juste après pour activer votre essai.</p>
-        <div class="form-clip">
-          <iframe id="n8nFrame" title="Formulaire Mailflair" src="https://gallagherlukaaaaa01.app.n8n.cloud/form/57c0a799-123a-4141-b53c-e668901b4b7f"></iframe>
-        </div>
-        <button class="form-fallback" id="manualDone">J'ai déjà envoyé le formulaire →</button>
-      </div>
+        <div class="popup-panel panel-form" id="panel-form">
+  <h2>Dernière étape avant la protection</h2>
+  <p class="sub">30 secondes. Notre assistant vous appelle juste après pour activer votre essai.</p>
+  
+  <form id="mailflairForm" style="display: flex; flex-direction: column; gap: 14px; margin-top: 20px;">
+    <input type="text" id="mfName" placeholder="Votre prénom" required 
+           style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
+           
+    <input type="email" id="mfEmail" placeholder="Votre adresse e-mail" required 
+           style="padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--txt); font-family: var(--font-body); font-size: 1rem; outline: none;">
+           
+    <button type="submit" class="btn btn-primary" style="padding: 15px; margin-top: 10px;">Activer mon essai</button>
+  </form>
+
+</div>
 
       <!-- Panel 3 : merci -->
       <div class="popup-panel" id="panel-thanks" style="text-align:center">
